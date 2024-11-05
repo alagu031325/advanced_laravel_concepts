@@ -16,6 +16,7 @@ class Kernel extends HttpKernel
     protected $middleware = [
         // \App\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
+        // \App\Http\Middleware\TestMiddleware::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
@@ -43,10 +44,13 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        // 'authCheck' => [
+        //     \App\Http\Middleware\AuthCheck::class,
+        // ]
     ];
 
     /**
-     * The application's middleware aliases.
+     * The application's middleware aliases. [Previously known as routeMiddleware - can be assigned to route groups or used individually]
      *
      * Aliases may be used instead of class names to conveniently assign middleware to routes and groups.
      *
@@ -64,5 +68,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'authRouteCheck' =>
+        \App\Http\Middleware\AuthCheck::class,
     ];
 }
